@@ -4,7 +4,7 @@
          esxi_host = inputData[&apos;esxi_ip&apos;]
          esxi_login_id = inputData[&apos;esxi_login_id&apos;]
          esxi_password_encrypted=inputData[&apos;esxi_password_encoded&apos;]
-    
+
          vm_user = inputData[&apos;vm_login_id&apos;]
          vm_password_encrypted=inputData[&apos;vm_password_encoded&apos;]
          vm_pass = base64.b64decode(vm_password_encrypted).rstrip(&apos;\n&apos;)
@@ -18,7 +18,7 @@
          vsphere.revert_snapshot(vm, snapname, True)
          print(&quot;Uploading  plat_pilots.tgz to VM&quot;)
          cmd = &apos;sshpass -p &apos; + vm_pass  + &apos; scp  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /setup/plat_pilots.tgz &apos; + vm_user + &apos;@&apos; + vmip + &apos;:/tmp&apos;
-    
+
          if ( 0 != os.system(cmd)):
 &gt;            raise EnvironmentError(&quot;Failed to upload plat_pilots.tgz &quot; )
 E            EnvironmentError: Failed to upload plat_pilots.tgz
@@ -35,7 +35,7 @@ lost connection
          esxi_host = inputData[&apos;esxi_ip&apos;]
          esxi_login_id = inputData[&apos;esxi_login_id&apos;]
          esxi_password_encrypted=inputData[&apos;esxi_password_encoded&apos;]
-    
+
          vm_user = inputData[&apos;vm_login_id&apos;]
          vm_password_encrypted=inputData[&apos;vm_password_encoded&apos;]
          vm_pass = base64.b64decode(vm_password_encrypted).rstrip(&apos;\n&apos;)
@@ -48,35 +48,4 @@ lost connection
          print(&quot;Reverting VM to snapshot &quot; +snapname)
          vsphere.revert_snapshot(vm, snapname, True)
          print(&quot;Uploading  plat_pilots.tgz to VM&quot;)
-         cmd = &apos;sshpass -p &apos; + vm_pass  + &apos; scp  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /setup/plat_pilots.tgz &apos; + vm_user + &apos;@&apos; + vmip + &apos;:/tmp&apos;
-    
-         if ( 0 != os.system(cmd)):
-&gt;            raise EnvironmentError(&quot;Failed to upload plat_pilots.tgz &quot; )
-E            EnvironmentError: Failed to upload plat_pilots.tgz
 
-/tests/bin/run_component_tests.py:33: EnvironmentError</error></testcase><testcase classname="run_component_tests" file="run_component_tests.py" line="78" name="test_container_load" time="0.000327825546265"><error message="test setup failure">@pytest.fixture(scope=&quot;module&quot;)
-    def initialize():
-         inputData = yaml.load(open(&quot;/setup/server.yaml&quot;))
-         esxi_host = inputData[&apos;esxi_ip&apos;]
-         esxi_login_id = inputData[&apos;esxi_login_id&apos;]
-         esxi_password_encrypted=inputData[&apos;esxi_password_encoded&apos;]
-    
-         vm_user = inputData[&apos;vm_login_id&apos;]
-         vm_password_encrypted=inputData[&apos;vm_password_encoded&apos;]
-         vm_pass = base64.b64decode(vm_password_encrypted).rstrip(&apos;\n&apos;)
-         vm=inputData[&apos;vm_name&apos;]
-         vmip=inputData[&apos;vm_ip&apos;]
-         snapname = inputData[&apos;snapshotname&apos;]
-         vsphere=Vsphere2(esxi_host, esxi_login_id, esxi_password_encrypted)
-         global cmd_prefix
-         cmd_prefix = &quot;sshpass -p &quot; + vm_pass +  &quot; ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null &quot; + vm_user + &quot;@&quot; + vmip + &quot; &quot;
-         print(&quot;Reverting VM to snapshot &quot; +snapname)
-         vsphere.revert_snapshot(vm, snapname, True)
-         print(&quot;Uploading  plat_pilots.tgz to VM&quot;)
-         cmd = &apos;sshpass -p &apos; + vm_pass  + &apos; scp  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /setup/plat_pilots.tgz &apos; + vm_user + &apos;@&apos; + vmip + &apos;:/tmp&apos;
-    
-         if ( 0 != os.system(cmd)):
-&gt;            raise EnvironmentError(&quot;Failed to upload plat_pilots.tgz &quot; )
-E            EnvironmentError: Failed to upload plat_pilots.tgz
-
-/tests/bin/run_component_tests.py:33: EnvironmentError</error></testcase></testsuite>
